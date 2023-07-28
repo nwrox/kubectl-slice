@@ -1,8 +1,6 @@
 name: DockerReleasing
 on:
   push:
-    tags:
-      - "*"
 
 env:
   GH_USER: ${{ github.actor }}
