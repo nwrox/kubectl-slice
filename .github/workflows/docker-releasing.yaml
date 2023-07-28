@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     
     permissions:
-      packages: read|write
+      packages: write
     
     steps:
       -
