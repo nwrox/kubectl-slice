@@ -6,7 +6,7 @@ ARG GOOS=linux
 ARG SLICE_VERSION=v1.2.6
 ARG LD_FLAGS="-s -w -X main.version="${SLICE_VERSION}" -extldflags -static"
 
-LABEL org.opencontainers.image.source="https://github.com/nwrox/kubectl-slice"
+LABEL org.opencontainers.image.source="https://github.com/${GH_USER}/kubectl-slice"
 
 WORKDIR /app
 
