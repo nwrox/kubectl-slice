@@ -4,7 +4,7 @@ ARG CGO_ENABLED=0
 ARG GOARCH=amd64
 ARG GOOS=linux
 ARG SLICE_VERSION=v1.2.6
-ARG LD_FLAGS="-s -w -X main.version="${SLICE_VERSION}" -extldflags -static"
+ARG LD_FLAGS="-s -w -X main.version="${SLICE_VERSION:-v1.2.6}" -extldflags -static"
 
 WORKDIR /app
 
