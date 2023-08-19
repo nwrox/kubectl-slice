@@ -3,7 +3,7 @@ on:
   push:
 
 env:
-  GH_USER: ${{ github.actor }}
+  GH_USER: 
   IMAGE_TAG: "latest"
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: ${{ env.GH_USER }}
+          username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       -
         name: "Set build date"
@@ -62,4 +62,6 @@ jobs:
             IMAGE_TAG=${{ env.IMAGE_TAG }}
             SLICE_VERSION=${{ steps.release_version.outputs.version }}
           push: true
-          tags: ghcr.io/${{ env.GH_USER }}/kubectl-slice:${{ env.IMAGE_TAG }}
+          tags: |
+            ghcr.io/${{ github.repository }}:${{ steps.release_version.outputs.version || 'latest' }}
+            ghcr.io/${{ github.repository }}:latest
