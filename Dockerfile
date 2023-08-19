@@ -36,4 +36,4 @@ LABEL org.opencontainers.image.created="${BUILD_DATE}" \
 
 USER 1002:1002
 
-ENTRYPOINT [ "/usr/bin/kubectl-slice" ]
+ENTRYPOINT [ "/usr/bin/kubectl-slice", "$@" ]
