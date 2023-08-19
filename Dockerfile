@@ -23,14 +23,16 @@ RUN CGO_ENABLED="${CGO_ENABLED}" GOARCH="${GOARCH}" GOOS="${GOOS}" go build -ldf
 FROM busybox:stable
 
 ARG BUILD_DATE=
-ARG GH_USER_ARG=
+ARG GH_REPO=
+ARG GH_REPO_DESCRIPTION=
+ARG IMAGE_TAG=latest
 
 COPY --chmod=0755 --from=build /kubectl-slice /usr/bin
 
 LABEL org.opencontainers.image.created="${BUILD_DATE}" \
-      org.opencontainers.image.description="kubectl-slice container" \
-      org.opencontainers.image.source="https://github.com/${GH_USER_ARG}/kubectl-slice" \
-      org.opencontainers.image.title="kubectl-slice:latest"
+      org.opencontainers.image.description="${GH_REPO_DESCRIPTION}" \
+      org.opencontainers.image.source="https://github.com/${GH_REPO}" \
+      org.opencontainers.image.title="kubectl-slice:${IMAGE_TAG}"
 
 USER 1002:1002
 
