@@ -56,6 +56,6 @@ jobs:
             GH_REPO=${{ github.repository }}
             GH_REPO_DESC=${{ steps.repo_desc.outputs.description }}
             IMAGE_TAG=${{ env.IMAGE_TAG }}
-            RELEASE_VERSION=${{ steps.release_version.outputs.version }}
+            SLICE_VERSION=${{ steps.release_version.outputs.version }}
           push: true
           tags: ghcr.io/${{ env.GH_USER }}/kubectl-slice:${{ env.IMAGE_TAG }}
