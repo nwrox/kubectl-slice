@@ -21,11 +21,15 @@ jobs:
           username: ${{ env.GH_USER }}
           password: ${{ secrets.GITHUB_TOKEN }}
       -
+        name: "Set build date"
+        id: build_date
+        run: echo "::set-output name=builddate::$(date -Isec)"
+      -
         name: Build and push
         uses: docker/build-push-action@v4
         with:
           build-args: |
-            BUILD_DATE=$(date -Isec)
+            BUILD_DATE=${{ steps.build_date.outputs.builddate }}
             GH_USER_ARG=${{ secrets.env.GH_USER }}
           push: true
           tags: ghcr.io/${{ env.GH_USER }}/kubectl-slice:latest
