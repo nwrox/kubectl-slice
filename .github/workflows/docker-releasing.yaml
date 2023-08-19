@@ -37,7 +37,7 @@ jobs:
             --silent \
             --url "https://api.github.com/repos/${{ github.repository }}"`
           
-          echo "description=$(jq -r '.description')" >> "${GITHUB_OUTPUT}"
+          echo "description=$(jq -r '.description' <<< "${RESPONSE}")" >> "${GITHUB_OUTPUT}"
       -
         name: "Set release version"
         id: "release_version"
@@ -50,7 +50,7 @@ jobs:
             --silent \
             --url "https://api.github.com/repos/${{ github.repository }}/releases"`
           
-          echo "version=$(jq -r '.[].tag_name')" >> "${GITHUB_OUTPUT}"
+          echo "version=$(jq -r '.[].tag_name' <<< "${RESPONSE}")" >> "${GITHUB_OUTPUT}"
       -
         name: Build and push
         uses: docker/build-push-action@v4
