@@ -4,6 +4,7 @@ on:
 
 env:
   GH_USER: ${{ github.actor }}
+  IMAGE_TAG: "latest"
 
 jobs:
   docker:
@@ -25,11 +26,18 @@ jobs:
         id: build_date
         run: echo "::set-output name=builddate::$(date -Isec)"
       -
+        name: "test"
+        id: fooobar
+        run: |
+          which curl
+          which jq
+      -
         name: Build and push
         uses: docker/build-push-action@v4
         with:
           build-args: |
             BUILD_DATE=${{ steps.build_date.outputs.builddate }}
-            GH_USER_ARG=${{ env.GH_USER }}
+            GH_REPO=${{ github.repository }}
+            IMAGE_TAG=${{ env.IMAGE_TAG }}
           push: true
-          tags: ghcr.io/${{ env.GH_USER }}/kubectl-slice:latest
+          tags: ghcr.io/${{ env.GH_USER }}/kubectl-slice:${{ env.IMAGE_TAG }}
