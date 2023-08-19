@@ -33,9 +33,11 @@ jobs:
 
           RESPONSE=`curl --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
             --header 'content-type: application/json' \
+            --show-error \
+            --silent \
             --url https://api.github.com/repos/${{ github.repository }}`
           
-          echo "::set-output name=description::$(jq -r '.description')"
+          echo "description=$(jq -r '.description')" >> "${GITHUB_OUTPUT}"
       -
         name: "Set release version"
         id: "release_version"
@@ -44,9 +46,11 @@ jobs:
 
           RESPONSE=`curl --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
             --header 'content-type: application/json' \
+            --show-error \
+            --silent \
             --url https://api.github.com/repos/${{ github.repository }}/releases`
           
-          echo "::set-output name=version::$(jq -r '.[].tag_name')"
+          echo "version=$(jq -r '.[].tag_name')" >> "${GITHUB_OUTPUT}"
       -
         name: Build and push
         uses: docker/build-push-action@v4
