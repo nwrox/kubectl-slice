@@ -9,7 +9,7 @@ ARG LD_FLAGS="-s -w -X main.version="${SLICE_VERSION}" -extldflags -static"
 
 ENV GH_USER="${GH_USER}"
 
-LABEL org.opencontainers.image.source="https://github.com/${GH_USER}/kubectl-slice"
+#LABEL org.opencontainers.image.source="https://github.com/${GH_USER}/kubectl-slice"
 
 WORKDIR /app
 
