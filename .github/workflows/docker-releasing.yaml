@@ -24,7 +24,7 @@ jobs:
       -
         name: "Set build date"
         id: build_date
-        run: echo "::set-output name=builddate::$(date -Isec)"
+        run: echo "builddate=$(date -Isec)" >> "${GITHUB_OUTPUT}"
       -
         name: "Set repository description"
         id: "repo_desc"
