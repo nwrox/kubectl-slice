@@ -30,6 +30,6 @@ jobs:
         with:
           build-args: |
             BUILD_DATE=${{ steps.build_date.outputs.builddate }}
-            GH_USER_ARG=${{ secrets.env.GH_USER }}
+            GH_USER_ARG=${{ env.GH_USER }}
           push: true
           tags: ghcr.io/${{ env.GH_USER }}/kubectl-slice:latest
