@@ -25,6 +25,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           build-args: |
+            "BUILD_DATE=$(date -Isec)"
             "GH_USER_ARG=${{ secrets.env.GH_USER }}"
           push: true
           tags: ghcr.io/${{ env.GH_USER }}/kubectl-slice:latest
