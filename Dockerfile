@@ -1,10 +1,14 @@
 FROM golang:1.19-alpine AS build
 
+ARG BUILD_DATE=
 ARG CGO_ENABLED=0
+ARG GH_USER_ARG=
 ARG GOARCH=amd64
 ARG GOOS=linux
 ARG SLICE_VERSION=v1.2.6
 ARG LD_FLAGS="-s -w -X main.version="${SLICE_VERSION}" -extldflags -static"
+
+ENV GH_USER="${GH_USER}"
 
 WORKDIR /app
 
